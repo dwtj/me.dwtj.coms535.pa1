@@ -1,0 +1,21 @@
+plugins {
+  id 'base'
+}
+
+task buildPdf(type:Exec) {
+  commandLine 'latexmk', '-quiet', '-pdf', 'report.tex'
+}
+
+build.dependsOn(buildPdf)
+
+task cleanLatex(type:Exec) {
+  commandLine 'latexmk', '-quiet', '-C'
+}
+
+task previewPdf(type:Exec) {
+  commandLine 'latexmk', '-quiet', '-pdf', '-pv', 'report.tex'
+}
+
+task previewPdfContinuous(type:Exec) {
+  commandLine 'latexmk', '-quiet', '-pdf', '-pvc', 'report.tex'
+}

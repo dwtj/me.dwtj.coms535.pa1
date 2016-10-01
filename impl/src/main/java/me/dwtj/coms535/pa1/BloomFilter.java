@@ -10,26 +10,26 @@ public interface BloomFilter {
     /**
      * Adds the string {@code s} to the filter.
      */
-    public void add(String s);
+    void add(String s);
 
     /**
      * Returns {@code true} iff {@code s} appears in the filter.
      */
-    public boolean appears(String s);
+    boolean appears(String s);
 
     /**
      * Returns the size of the filter, that is, the size of the table used to back the data
      * structure.
      */
-    public long filterSize();
+    long filterSize();
 
     /**
      * Returns the number of elements which have been added to the filter.
      */
-    public long dataSize();
+    long dataSize();
 
     /**
      * Returns the number of hash functions used.
      */
-    public long numHashes();
+    long numHashes();
 }

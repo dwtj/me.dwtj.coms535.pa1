@@ -120,21 +120,4 @@ public class LongBitSet
         if ( toSet != null )
             toSet.clear( 0, getPos( toIndex ) );
     }
-
-    /**
-     * Iteration over all set values in a LongBitSet. Order of iteration is not specified.
-     * @param proc Procedure to call. If it returns {@code false}, then iteration will stop at once
-     */
-    public void forEach( final LongProcedure proc )
-    {
-        for ( final Map.Entry<Long, BitSet> entry : m_sets.entrySet() )
-        {
-            final BitSet bs = entry.getValue();
-            final long baseIndex = entry.getKey() << VALUE_BITS;
-            for ( int i = bs.nextSetBit( 0 ); i >= 0; i = bs.nextSetBit( i + 1 ) ) {
-                if ( !proc.forEntry( baseIndex + i ) )
-                    return;
-            }
-        }
-    }
 }

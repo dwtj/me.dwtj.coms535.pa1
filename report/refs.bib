@@ -1,0 +1,18 @@
+@inproceedings{kirsch2006less,
+  title={Less hashing, same performance: Building a better Bloom filter},
+  author={Kirsch, Adam and Mitzenmacher, Michael},
+  booktitle={European Symposium on Algorithms},
+  pages={456--467},
+  year={2006},
+  organization={Springer},
+  abstract={
+    A standard technique from the hashing literature is to use two hash
+    functions h_1(x) and h_2(x) to simulate additional hash functions of the
+    form g_i (x) = h_1(x) + ih_2(x). We demonstrate that this technique can be
+    usefully applied to Bloom filters and related data structures.
+    Specifically, only two hash functions are necessary to effectively
+    implement a Bloom filter without any loss in the asymptotic false positive
+    probability. This leads to less computation and potentially less need for
+    randomness in practice.
+  }
+}

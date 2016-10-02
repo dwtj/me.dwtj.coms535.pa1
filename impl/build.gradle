@@ -9,4 +9,9 @@ compileJava {
 
 dependencies {
   compile files('lib/org.getopt/utils-1.0.jar')
+  testCompile 'junit:junit:4.12'
+}
+
+repositories {
+  mavenCentral()
 }

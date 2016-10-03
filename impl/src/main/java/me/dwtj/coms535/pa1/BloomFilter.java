@@ -1,4 +1,7 @@
 package me.dwtj.coms535.pa1;
+
+import java.util.function.BiFunction;
+
 /**
  * Stores an approximation of a set of strings using a bloom filter.
  *
@@ -32,4 +35,10 @@ public interface BloomFilter {
      * Returns the number of hash functions used.
      */
     long numHashes();
+
+    /**
+     * A factory function which takes the set size and the number of number of bits per element
+     * and creates a bloom filter.
+     */
+    interface Maker extends BiFunction<Integer, Integer, BloomFilter> { /* Nothing needed here. */ }
 }

@@ -15,3 +15,9 @@ dependencies {
 repositories {
   mavenCentral()
 }
+
+task executeFalsePositives(type: JavaExec) {
+  dependsOn build
+  main = 'me.dwtj.coms535.pa1.FalsePositives'
+  classpath = sourceSets.main.runtimeClasspath
+}

@@ -31,13 +31,13 @@ public class BloomFilterTest {
     @Test
     public void randomSetTestWithBloomFilterDet() {
         int numItems = 1000000;
-        randomSetTest(new BloomFilterDet(numItems, 20), numItems);
+        randomSetTest(new BloomFilterDet(numItems, 20), numItems, 10, numItems);
     }
 
     @Test
     public void randomSetTestWithBloomFilterRan() {
         int numItems = 1000000;
-        randomSetTest(new BloomFilterRan(numItems, 20), numItems);
+        randomSetTest(new BloomFilterRan(numItems, 20), numItems, 10, numItems);
     }
 
     private static void tinySetTest(BloomFilter filter) {
@@ -50,12 +50,9 @@ public class BloomFilterTest {
         }
     }
 
-    private static void randomSetTest(BloomFilter filter, int numItems) {
+    private static void randomSetTest(BloomFilter filter, int numItems, int minTries, int maxTries) {
         float[] items = new float[numItems];
         Random rand = new Random();
-        int minTries = 10;
-        int maxTries = 10000;
-
         for (int idx = 0; idx < numItems; idx++) {
             items[idx] = rand.nextFloat();
         }

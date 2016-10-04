@@ -17,9 +17,17 @@ repositories {
   mavenCentral()
 }
 
+def projPkg = 'me.dwtj.coms535.pa1'
+
 task executeFalsePositives(type: JavaExec) {
   dependsOn build
-  main = 'me.dwtj.coms535.pa1.FalsePositives'
+  main = "$projPkg/FalsePositives"
+  classpath = sourceSets.main.runtimeClasspath
+}
+
+task executeEmpiricalComparison(type: JavaExec) {
+  dependsOn build
+  main = "$projPkg/EmpiricalComparison"
   classpath = sourceSets.main.runtimeClasspath
 }
 

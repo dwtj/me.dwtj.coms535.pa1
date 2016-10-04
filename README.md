@@ -15,3 +15,7 @@ The database files can be downloaded from the course website and verified
 against their expected SHA1 hashes using
 
     ./gradlew :impl:verifyAllFiles
+
+The `EmpiricalComparison` program can be run using
+
+    .gradlew -q :impl:executeEmpiricalComparison

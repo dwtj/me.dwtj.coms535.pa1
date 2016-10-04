@@ -1,5 +1,6 @@
 plugins {
   id 'java'
+  id "de.undercouch.download" version "3.1.1"
 }
 
 compileJava {
@@ -21,3 +22,37 @@ task executeFalsePositives(type: JavaExec) {
   main = 'me.dwtj.coms535.pa1.FalsePositives'
   classpath = sourceSets.main.runtimeClasspath
 }
+
+import de.undercouch.gradle.tasks.download.Download
+import de.undercouch.gradle.tasks.download.Verify
+
+def downloadSrc = 'http://web.cs.iastate.edu/~pavan/535/F16/pa1/'
+def downloadDest = "$projectDir/data/"
+
+task downloadFiles(type: Download) {
+  src(["$downloadSrc/database.txt",
+       "$downloadSrc/DiffFile.txt",
+       "$downloadSrc/grams.txt"])
+  dest downloadDest
+  overwrite false
+}
+
+task verifyDatabaseFile(type: Verify, dependsOn: downloadFiles) {
+  src "$downloadDest/database.txt"
+  algorithm 'SHA1'
+  checksum '638477827403f716cb71cad387bb1e069d055678'
+}
+
+task verifyDiffFile(type: Verify, dependsOn: downloadFiles) {
+  src "$downloadDest/DiffFile.txt"
+  algorithm 'SHA1'
+  checksum '03acb7ff0874987f3ada02aa02df1c20265ed875'
+}
+
+task verifyGramsFile(type: Verify, dependsOn: downloadFiles) {
+  src "$downloadDest/grams.txt"
+  algorithm 'SHA1'
+  checksum 'e5782aa358593d62079d635443340ab7d6ec9cad'
+}
+
+task verifyAllFiles(dependsOn: [verifyDatabaseFile, verifyDiffFile, verifyGramsFile])

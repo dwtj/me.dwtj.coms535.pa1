@@ -2,16 +2,22 @@ plugins {
   id 'base'
 }
 
+// Build Tasks
 task buildPdf(type:Exec) {
   commandLine 'latexmk', '-quiet', '-pdf', 'report.tex'
 }
-
 build.dependsOn(buildPdf)
 
-task cleanLatex(type:Exec) {
+// Clean Tasks
+task cleanLatexmk(type: Exec) {
   commandLine 'latexmk', '-quiet', '-C'
 }
+task cleanLatex(type: Exec, dependsOn: cleanLatexmk) {
+  commandLine 'rm', '-f', 'report.bbl', 'report.run.xml'
+}
+clean.dependsOn(cleanLatex)
 
+// Preview Tasks.
 task previewPdf(type:Exec) {
   commandLine 'latexmk', '-quiet', '-pdf', '-pv', 'report.tex'
 }

@@ -60,6 +60,13 @@ public interface Database {
         };
     }
 
+    /**
+     * Searches the file indicated by the given path for an entry with the given key. Each line of
+     * the file is parsed as a key-value pair using the {@link #splitLine(String)} method.
+     *
+     * @returns An optional of the corresponding value if it was found, or {@link Optional#empty()}
+     *          if no matching record was found.
+     */
     static Optional<String> retrieveRecordFrom(String key, Path path) {
         try (Stream<String> stream = Files.lines(path)) {
             return stream.filter((l) -> key.equals(splitLine(l).getKey()))
@@ -69,6 +76,10 @@ public interface Database {
         }
     }
 
+    /**
+     * Scans the file indicated by the given path to count how many lines it contains (or
+     * equivalently, the number of key-value pairs which it contains).
+     */
     static int countLines(Path path) {
         try (LineNumberReader reader = new LineNumberReader(new FileReader(path.toFile()))) {
             while (reader.readLine() != null) { }
@@ -78,6 +89,9 @@ public interface Database {
         }
     }
 
+    /**
+     * A helper method which scans {@link #DIFF_FILE} to see if it contains the given key.
+     */
     static boolean isInDiffFile(String key) {
         try (Stream<String> stream = Files.lines(DIFF_FILE)) {
             return stream.anyMatch((l) -> key.equals(splitLine(l).getKey()));

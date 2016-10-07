@@ -25,6 +25,10 @@ public class BloomFilterDet implements BloomFilter {
             throw new IllegalArgumentException("Illegal `bitsPerElement`: " + bitsPerElement);
 
         filterSize = setSize * bitsPerElement;
+        if (filterSize >= 1L << 32) {
+            throw new IllegalArgumentException("Filter size is too large: " + filterSize);
+        }
+
         numHashes = round(bitsPerElement * log(2));
     }
 
